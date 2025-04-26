@@ -42,9 +42,7 @@ Responsive Layout: Mobile and desktop friendly
 Media: Banner images, product images, and promotional videos
 
 📁 Project Structure
-bash
-Copy
-Edit
+
 Final Project/
 │
 ├── app.py            # Main Flask app
@@ -62,21 +60,15 @@ Final Project/
 │   └── admin/
 ├── __pycache__/
 🚀 How to Run
-bash
-Copy
-Edit
+
 # 1. Clone the repository
 git clone https://github.com/your-username/watch_haven.git
 cd "Final Project"
 
-# 2. Create a virtual environment
-python -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
-
-# 3. Install dependencies
+# 2. Install dependencies
 pip install flask flask_sqlalchemy flask_wtf flask_login
 
-# 4. Run the app
+# 3. Run the app
 python app.py
 Server will run on http://127.0.0.1:5000/
 
