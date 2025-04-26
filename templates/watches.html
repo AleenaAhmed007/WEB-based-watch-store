@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block title %}Watches - Watch Haven{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">
+    {% if request.args.get('gender') == 'men' %}
+        Men's Watches
+    {% elif request.args.get('gender') == 'women' %}
+        Women's Watches
+    {% else %}
+        All Watches
+    {% endif %}
+</h1>
+
+<div class="row">
+    {% for watch in watches %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <img src="{{ url_for('static', filename='images/' + watch.name|lower|replace(' ', '-') + '.jpg') }}"
+                class="card-img-top" alt="{{ watch.name }}"
+                onerror="this.src='{{ url_for('static', filename='images/rolex.jpg') }}'">
+           
+                <div class="card-body">
+                    <h5 class="card-title">{{ watch.name }}</h5>
+                    <p class="card-text">${{ watch.price }}</p>
+                    <div class="d-flex justify-content-between">
+                        <a href="{{ url_for('watch_detail', id=watch.id) }}" class="btn btn-primary">View Details</a>
+                        {% if 'user_id' in session %}
+                            <a href="{{ url_for('add_to_cart', watch_id=watch.id) }}" class="btn btn-success">Add to Cart</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

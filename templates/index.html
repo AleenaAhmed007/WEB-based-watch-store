@@ -1,0 +1,311 @@
+{% extends "layout.html" %}
+
+{% block title %}Watch Haven - Home{% endblock %}
+
+{% block content %}
+<!-- Hero Section with Video Background -->
+<div class="hero-video-container">
+    <video class="hero-video" autoplay muted loop>
+        <source src="static/videos/watch-video.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <div class="hero-content">
+        <div class="container">
+            <h1 class="hero-title">Luxury Timepieces</h1>
+            <p class="hero-subtitle">Discover the art of watchmaking excellence</p>
+            <a href="{{ url_for('watches') }}" class="btn btn-primary btn-lg">Shop Now</a>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-5">
+    <div class="row mb-5">
+        <div class="col-12 text-center">
+            <h2 class="section-title">Featured Watches</h2>
+            <p class="section-subtitle">Exceptional timepieces crafted with precision and artistry</p>
+        </div>
+    </div>
+    
+    <div class="row">
+        {% for watch in watches[:6] %}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <img src="{{ url_for('static', filename='images/' + watch.name|lower|replace(' ', '-') + '.jpg') }}"
+                    class="card-img-top" alt="{{ watch.name }}"
+                    onerror="this.src='{{ url_for('static', filename='images/rolex.jpg') }}'">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ watch.name }}</h5>
+                        <p class="card-text">${{ watch.price }}</p>
+                        <a href="{{ url_for('watch_detail', id=watch.id) }}" class="btn btn-primary">View Details</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Services Section -->
+<section class="services-section" id="services">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-12 text-center">
+                <h2 class="section-title">Our Premium Services</h2>
+                <p class="section-subtitle">Exceptional care for exceptional timepieces</p>
+            </div>
+        </div>
+        
+        <div class="row">
+            <!-- Watch Maintenance Service -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3 class="service-title">Watch Maintenance</h3>
+                    <p class="service-description">
+                        Regular professional maintenance to keep your luxury timepiece in perfect working condition. 
+                        Our certified experts handle everything from movement servicing to polishing.
+                    </p>
+                    <div class="service-features">
+                        <div class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <span>Complete Movement Service</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <span>Water Resistance Testing</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <span>Professional Cleaning</span>
+                        </div>
+                    </div>
+                    <a href="#" class="btn btn-secondary">Learn More</a>
+                </div>
+            </div>
+            
+            <!-- Watch Restoration Service -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-sync-alt"></i>
+                    </div>
+                    <h3 class="service-title">Vintage Restoration</h3>
+                    <p class="service-description">
+                        Bring your cherished timepiece back to its former glory with our meticulous 
+                        restoration service, preserving its historical value while enhancing its function.
+                    </p>
+                    <div class="service-features">
+                        <div class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <span>Component Reconstruction</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <span>Historical Accuracy</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <span>Dial Refinishing</span>
+                        </div>
+                    </div>
+                    <a href="#" class="btn btn-secondary">Learn More</a>
+                </div>
+            </div>
+            
+            <!-- Watch Custom Service -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-gem"></i>
+                    </div>
+                    <h3 class="service-title">Custom Design</h3>
+                    <p class="service-description">
+                        Create a one-of-a-kind timepiece that reflects your unique style and personality.
+                        Our master craftsmen will guide you through the bespoke watchmaking process.
+                    </p>
+                    <div class="service-features">
+                        <div class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <span>Personalized Consultation</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <span>Custom Engraving</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <span>Exclusive Materials</span>
+                        </div>
+                    </div>
+                    <a href="#" class="btn btn-secondary">Learn More</a>
+                </div>
+            </div>
+            
+            <!-- Watch Appraisal Service -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-balance-scale"></i>
+                    </div>
+                    <h3 class="service-title">Watch Appraisal</h3>
+                    <p class="service-description">
+                        Professional evaluation of your timepiece's authenticity, condition, and market value
+                        by certified experts with decades of experience in the luxury watch market.
+                    </p>
+                    <div class="service-features">
+                        <div class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <span>Authentication Certificate</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <span>Market Value Assessment</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <span>Condition Documentation</span>
+                        </div>
+                    </div>
+                    <a href="#" class="btn btn-secondary">Learn More</a>
+                </div>
+            </div>
+            
+            <!-- Watch Battery Service -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-battery-full"></i>
+                    </div>
+                    <h3 class="service-title">Battery & Power</h3>
+                    <p class="service-description">
+                        Expert battery replacement and power reserve optimization for your quartz 
+                        or automatic timepiece, performed with the utmost care and precision.
+                    </p>
+                    <div class="service-features">
+                        <div class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <span>Premium Battery Installation</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <span>Gasket Replacement</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <span>Water Resistance Check</span>
+                        </div>
+                    </div>
+                    <a href="#" class="btn btn-secondary">Learn More</a>
+                </div>
+            </div>
+            
+            <!-- Watch Trade-In Service -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-exchange-alt"></i>
+                    </div>
+                    <h3 class="service-title">Trade-In & Upgrade</h3>
+                    <p class="service-description">
+                        Trade in your current timepiece for a new model or upgrade to a more premium watch.
+                        We offer competitive valuations and a seamless experience.
+                    </p>
+                    <div class="service-features">
+                        <div class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <span>Fair Market Valuation</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <span>Trade-Up Credits</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <span>Flexible Payment Options</span>
+                        </div>
+                    </div>
+                    <a href="#" class="btn btn-secondary">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Advertising Collections Section -->
+<section class="collections-section">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-12 text-center">
+                <h2 class="section-title">Explore Our Collections</h2>
+                <p class="section-subtitle">Discover the perfect watch for every style and occasion</p>
+            </div>
+        </div>
+        
+        <div class="row">
+            <!-- Summer Collection -->
+            <div class="col-lg-6 col-md-6 mb-4">
+                <div class="collection-card summer-collection">
+                    <div class="collection-overlay"></div>
+                    <div class="collection-content">
+                        <h3 class="collection-title">Asthetic Collection</h3>
+                        <p class="collection-description">Vibrant timepieces perfect for the aesthetic vibe</p>
+                
+                        <a href="#" class="btn btn-light">Shop Collection</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- New Arrivals -->
+            <div class="col-lg-6 col-md-6 mb-4">
+                <div class="collection-card new-arrivals">
+                    <div class="collection-overlay"></div>
+                    <div class="collection-content">
+                        <h3 class="collection-title">New Arrivals</h3>
+                        <p class="collection-description">Be the first to own our latest masterpieces</p>
+                        <a href="#" class="btn btn-light">Discover Now</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Limited Edition -->
+            <div class="col-lg-4 col-md-4 mb-4">
+                <div class="collection-card limited-edition">
+                    <div class="collection-overlay"></div>
+                    <div class="collection-content">
+                        <h3 class="collection-title">Limited Edition</h3>
+                        <p class="collection-description">Exclusive designs for the discerning collector</p>
+                        <a href="#" class="btn btn-light">View Collection</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Classic Collection -->
+            <div class="col-lg-4 col-md-4 mb-4">
+                <div class="collection-card classic-collection">
+                    <div class="collection-overlay"></div>
+                    <div class="collection-content">
+                        <h3 class="collection-title">Classic Collection</h3>
+                        <p class="collection-description">Timeless elegance for any occasion</p>
+                        <a href="#" class="btn btn-light">Explore Classics</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Bestsellers -->
+            <div class="col-lg-4 col-md-4 mb-4">
+                <div class="collection-card bestsellers">
+                    <div class="collection-overlay"></div>
+                    <div class="collection-content">
+                        <h3 class="collection-title">Bestsellers</h3>
+                        <p class="collection-description">Our most popular and beloved models</p>
+                        <a href="#" class="btn btn-light">Shop Favorites</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+
