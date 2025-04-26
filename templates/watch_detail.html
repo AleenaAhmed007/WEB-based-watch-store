@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block title %}{{ watch.name }} - Watch Haven{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6">
+        <img src="{{ url_for('static', filename='images/' + watch.name|lower|replace(' ', '-') + '.jpg') }}"
+        class="card-img-top" alt="{{ watch.name }}"
+        onerror="this.src='{{ url_for('static', filename='/static/images/rolex.jpg') }}'">
+    </div>
+    <div class="col-md-6">
+        <h1>{{ watch.name }}</h1>
+        <p class="lead">${{ watch.price }}</p>
+        <p>Category: {{ watch.gender|capitalize }} Watch</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, urna eget tincidunt congue, nisi nisl tempor nisi, euismod rutrum nisi nisl eget nisi.</p>
+        
+        {% if 'user_id' in session %}
+            <a href="{{ url_for('add_to_cart', watch_id=watch.id) }}" class="btn btn-success btn-lg">Add to Cart</a>
+        {% else %}
+            <a href="{{ url_for('login') }}" class="btn btn-primary">Login to Purchase</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

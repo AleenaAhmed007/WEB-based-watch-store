@@ -1,0 +1,65 @@
+{% extends "admin/layout.html" %}
+
+{% block title %}Admin Dashboard - Watch Haven{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Admin Dashboard</h1>
+
+<div class="row">
+    <div class="col-md-6 mb-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <i class="fas fa-watch me-2 text-primary"></i>Manage Watches
+                </h5>
+                <p class="card-text">Add, edit, or remove watches from your inventory.</p>
+                <a href="{{ url_for('admin_watches') }}" class="btn btn-primary">Go to Watches</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6 mb-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <i class="fas fa-shopping-bag me-2 text-primary"></i>Manage Orders
+                </h5>
+                <p class="card-text">View and manage customer orders.</p>
+                <a href="{{ url_for('admin_orders') }}" class="btn btn-primary">Go to Orders</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">Quick Stats</h5>
+            </div>
+            <div class="card-body">
+                <div class="row text-center">
+                    <div class="col-md-4 mb-3 mb-md-0">
+                        <div class="p-3 bg-light rounded">
+                            <h3 id="watchCount">{{ watches|length if watches else 0 }}</h3>
+                            <p class="text-muted mb-0">Total Products</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3 mb-md-0">
+                        <div class="p-3 bg-light rounded">
+                            <h3 id="orderCount">{{ orders|length if orders else 0 }}</h3>
+                            <p class="text-muted mb-0">Total Orders</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="p-3 bg-light rounded">
+                            <h3 id="userCount">{{ users|length if users else 0 }}</h3>
+                            <p class="text-muted mb-0">Registered Users</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

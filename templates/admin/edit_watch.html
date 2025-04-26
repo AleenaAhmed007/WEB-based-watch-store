@@ -1,0 +1,84 @@
+{% extends "admin/layout.html" %}
+
+{% block title %}Edit Watch - Admin{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>Edit Watch</h1>
+    <a href="{{ url_for('admin_watches') }}" class="btn btn-secondary">
+        <i class="fas fa-arrow-left me-1"></i> Back to Watches
+    </a>
+</div>
+
+<div class="card">
+    <div class="card-header bg-warning">
+        <h5 class="mb-0">Edit Watch #{{ watch.id }}</h5>
+    </div>
+    <div class="card-body">
+        <form method="POST" action="{{ url_for('admin_edit_watch', id=watch.id) }}">
+            {{ form.hidden_tag() }}
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    {{ form.name.label(class="form-label") }}
+                    {{ form.name(class="form-control") }}
+                    {% if form.name.errors %}
+                        <div class="invalid-feedback d-block">
+                            {% for error in form.name.errors %}
+                                {{ error }}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+                
+                <div class="col-md-4 mb-3">
+                    {{ form.price.label(class="form-label") }}
+                    {{ form.price(class="form-control") }}
+                    {% if form.price.errors %}
+                        <div class="invalid-feedback d-block">
+                            {% for error in form.price.errors %}
+                                {{ error }}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+                
+                <div class="col-md-4 mb-3">
+                    {{ form.gender.label(class="form-label") }}
+                    {{ form.gender(class="form-select") }}
+                    {% if form.gender.errors %}
+                        <div class="invalid-feedback d-block">
+                            {% for error in form.gender.errors %}
+                                {{ error }}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <div class="d-flex justify-content-between">
+                <a href="{{ url_for('admin_delete_watch', id=watch.id) }}" class="btn btn-danger" 
+                   onclick="return confirm('Are you sure you want to delete this watch?')">
+                    <i class="fas fa-trash me-1"></i> Delete Watch
+                </a>
+                {{ form.submit(class="btn btn-primary") }}
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header bg-light">
+                <h5 class="mb-0">Watch Preview</h5>
+            </div>
+            <div class="card-body text-center">
+                <img src="/api/placeholder/300/300" class="img-fluid mb-3" alt="{{ watch.name }}">
+                <h5>{{ watch.name }}</h5>
+                <p class="fw-bold text-danger">${{ watch.price }}</p>
+                <p class="text-muted">Category: {{ watch.gender|capitalize }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
