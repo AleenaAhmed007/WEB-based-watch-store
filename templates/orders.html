@@ -23,14 +23,18 @@
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
-                                        <th>Product (Quantity)</th>
+                                        <th>Product</th>
+                                        <th>Quantity</th>
+                                        <th class="text-end">Price</th>
                                         <th class="text-end">Subtotal</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {% for item in order.items %}
                                         <tr>
-                                            <td>{{ item.watch.name }} (x{{ item.quantity }})</td>
+                                            <td>{{ item.watch.name }}</td>
+                                            <td>{{ item.quantity }}</td>
+                                            <td class="text-end">${{ "%.2f"|format(item.watch.price) }}</td>
                                             <td class="text-end">
                                                 ${{ "%.2f"|format(item.subtotal) }}
                                             </td>
@@ -39,9 +43,9 @@
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <th>Total</th>
+                                        <th colspan="3">Total</th>
                                         <th class="text-end">
-                                            ${{ "%.2f"|format(order.items | map(attribute='subtotal') | sum) }}
+                                            ${{ "%.2f"|format(order.items|map(attribute='subtotal')|sum) }}
                                         </th>
                                     </tr>
                                 </tfoot>
@@ -49,9 +53,10 @@
                         </div>
                     </div>
                     <div class="card-footer bg-white text-end">
-                        <a href="#" class="btn btn-sm btn-outline-primary">
-                            <i class="fas fa-receipt me-1"></i> View Details
-                        </a>
+                        <!-- Remove the problematic link for now -->
+                        <button class="btn btn-sm btn-outline-primary" disabled>
+                            <i class="fas fa-receipt me-1"></i> Order Details
+                        </button>
                     </div>
                 </div>
             </div>

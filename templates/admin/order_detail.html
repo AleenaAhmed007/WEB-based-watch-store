@@ -37,7 +37,9 @@
                             <tr>
                                 <th>Product</th>
                                 <th>Gender</th>
-                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Unit Price</th>
+                                <th>Subtotal</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -45,13 +47,15 @@
                                 <tr>
                                     <td>{{ watch.name }}</td>
                                     <td>{{ watch.gender|capitalize }}</td>
+                                    <td>{{ order_item.quantity }}</td>
                                     <td>${{ watch.price }}</td>
+                                    <td>${{ (watch.price|float * order_item.quantity)|round(2) }}</td>
                                 </tr>
                             {% endfor %}
                         </tbody>
                         <tfoot>
                             <tr>
-                                <th colspan="2" class="text-end">Total</th>
+                                <th colspan="4" class="text-end">Total</th>
                                 <th>${{ total }}</th>
                             </tr>
                         </tfoot>
