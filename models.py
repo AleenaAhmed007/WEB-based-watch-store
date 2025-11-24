@@ -2,7 +2,7 @@ from app import db
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 
-# Inheritance: Inherits from db.Model
+# Inheritance
 class Users(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(100))
@@ -10,15 +10,15 @@ class Users(db.Model):
     password = db.Column(db.String(100))
     role = db.Column(db.Enum('user', 'admin'), default='user')
     
-    # Encapsulation: Related data grouped
+    # Encapsulation
     orders = db.relationship('Orders', backref='user', lazy=True)
     cart_items = db.relationship('Cart', backref='user', lazy=True)
     
-    # Abstraction: Hides password hashing
+    # Abstraction
     def set_password(self, password):
         self.password = generate_password_hash(password)
         
-    # Abstraction: Hides password checking
+    # Abstraction
     def check_password(self, password):
         return check_password_hash(self.password, password)
 
@@ -56,7 +56,7 @@ class OrderItems(db.Model):
     watch_id = db.Column(db.Integer, db.ForeignKey('watches.id'))
     quantity = db.Column(db.Integer, default=1)
 
-    # Abstraction: Calculates subtotal without exposing logic
+
     @property
     def subtotal(self):
         return float(self.watch.price) * self.quantity

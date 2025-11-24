@@ -8,11 +8,11 @@ from sqlalchemy.orm import joinedload
 
 # ABSTRACTION
 class RouteHandler:
-    """Base class - Abstract class that defines common functionality"""
+    
     
     @classmethod
     def handle(cls, *args, **kwargs):
-        """Handle the route with proper authentication and error handling"""
+       
         # ABSTRACTION
         try:
             return cls._process(*args, **kwargs)
@@ -22,7 +22,7 @@ class RouteHandler:
     
     @classmethod
     def _process(cls, *args, **kwargs):
-        """Main processing logic to be overridden by subclasses"""
+        
         # ABSTRACTION
         pass
     
@@ -215,7 +215,7 @@ class CartRoutes(RouteHandler):
         
         cart_item = Cart.query.get_or_404(cart_id)
         
-        # Make sure the cart item belongs to the logged-in user
+       
         if cart_item.user_id != session['user_id']:
             flash('Unauthorized access!')
             return redirect(url_for('cart'))
@@ -225,7 +225,7 @@ class CartRoutes(RouteHandler):
             db.session.commit()
             flash('Quantity updated!')
         else:
-            # If quantity would become 0, remove the item from cart
+            
             db.session.delete(cart_item)
             db.session.commit()
             flash('Item removed from cart!')
